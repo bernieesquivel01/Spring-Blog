@@ -8,14 +8,14 @@ public class PostControllers {
 
     @GetMapping(path = "/posts")
     @ResponseBody
-    public String posts(){
+    public String postsIndex(){
         return "post index page";
     }
 
     @GetMapping(path = "/posts/{id}")
     @ResponseBody
-    public String viewPost(){
-        return "view an individual post";
+    public String viewPost(@PathVariable int id){
+        return "view an individual post" + id;
     }
 
     @GetMapping(path = "/posts/create")
