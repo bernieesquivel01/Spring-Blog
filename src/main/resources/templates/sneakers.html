@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--<h1 th:text="${sneakers}"></h1>-->
+
+<form action="/add" method="post">
+    <input type="text" name="sneakers" id="sneakers" class="field" />
+    <button>Add</button>
+</form>
+
+<div th:each="sneakers : ${sneakers}">
+    <p th:text="${sneakers.getId()} + ': '  + ${sneakers.getBrand()} + ' - ' + ${sneakers.getModel()} + ' - ' + ${sneakers.getName()}"/>
+</div>
+
+<!--<div th:each="sneakers : ${sneakers}">-->
+<!--    <p th:text="${sneakers.getId()}"/>-->
+<!--    <p th:text="${sneakers.getBrand()}"/>-->
+<!--    <p th:text="${sneakers.getModel()}"/>-->
+<!--    <p th:text="${sneakers.getName()}"/>-->
+<!--</div>-->
+
+<h1> All Nike Sneakers: </h1>
+<div th:each="sneakers : ${nike}">
+    <p th:text="${sneakers.getModel()}"/>
+    <p th:text="${sneakers.getName()}"/>
+</div>
+
+<h1> All Adidas Sneakers: </h1>
+<div th:each="sneakers : ${adidas}">
+    <p th:text="${sneakers.getBrand()}"/>
+    <p th:text="${sneakers.getModel()}"/>
+    <p th:text="${sneakers.getName()}"/>
+</div>
+
+</body>
+</html>
