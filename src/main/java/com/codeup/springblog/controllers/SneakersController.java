@@ -1,39 +1,52 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.RepositoriesJPALecture.CarRepository;
+import com.codeup.springblog.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @Controller
 public class SneakersController {
 
     private final SneakersRepository sneakersDao;
 
-    public SneakersController(SneakersRepository sneakersDao){
+    public SneakersController(SneakersRepository sneakersDao) {
         this.sneakersDao = sneakersDao;
     }
 
-    @GetMapping("/sneakers")
-    public String sneakersIndex(Model model){
-        model.addAttribute("sneakers", sneakersDao.findAll());
+//    @GetMapping("/sneakers")
+//    public String sneakersIndex(Model model){
+//        model.addAttribute("sneakers", sneakersDao.findAll());
+//
+////        model.addAttribute("nike", sneakersDao.findByBrand("Nike"));
+//        model.addAttribute("nike", sneakersDao.findAllByBrand("Nike"));
+//        model.addAttribute("adidas", sneakersDao.findAllByBrand("Adidas"));
+//
+//        return "sneakers";
+//    }
 
-//        model.addAttribute("nike", sneakersDao.findByBrand("Nike"));
-        model.addAttribute("nike", sneakersDao.findAllByBrand("Nike"));
-        model.addAttribute("adidas", sneakersDao.findAllByBrand("Adidas"));
+    @GetMapping(path = "/sneakers")
+    public String indexSneakers(Model model) {
 
-        return "sneakers";
+        model.addAttribute("allSneakers", sneakersDao.findAll());
+
+        return "sneakers/index";
     }
 
-    @GetMapping("/add")
-    public String showAddForm(){
-        return "add";
+    @GetMapping(path = "/sneakers/{id}")
+    public String individualSneaker(@PathVariable int id) {
+
+        return "sneakers/show";
     }
 
-    @PostMapping("/add")
-    public String addSneakers(@RequestParam(name="sneakers") String sneakers, Model model){
-        return "add";
+    @PostMapping(path = "/sneakers/delete/{id}")
+    public String deleteSneaker(@PathVariable long id) {
+        long deleteSneakerId = id;
+        sneakersDao.deleteById(deleteSneakerId);
+        return "redirect:/sneakers";
     }
+
 }
