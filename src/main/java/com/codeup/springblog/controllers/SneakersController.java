@@ -42,6 +42,28 @@ public class SneakersController {
         return "sneakers/show";
     }
 
+    @GetMapping(path = "/sneakers/edit/{id}")
+    public String editSneaker(@PathVariable long id, Model model){
+        Sneaker editSneaker = sneakersDao.getById(id);
+
+        model.addAttribute("sneakerToEdit", editSneaker);
+
+        return "sneakers/edit";
+    }
+
+    @PostMapping("/sneakers/edit")
+    public String saveEditSneaker(@RequestParam(name="sneakerBrand") String sneakerBrand, @RequestParam(name="sneakerModel") String sneakerModel, @RequestParam(name="sneakerName") String sneakerName, @RequestParam(name="sneakerId") long id){
+
+        Sneaker sneakerToEdit = sneakersDao.getById(id);
+        sneakerToEdit.setBrand(sneakerBrand);
+        sneakerToEdit.setModel(sneakerModel);
+        sneakerToEdit.setName(sneakerName);
+
+        sneakersDao.save(sneakerToEdit);
+
+        return "redirect:/sneakers";
+    }
+
     @PostMapping(path = "/sneakers/delete/{id}")
     public String deleteSneaker(@PathVariable long id) {
         long deleteSneakerId = id;

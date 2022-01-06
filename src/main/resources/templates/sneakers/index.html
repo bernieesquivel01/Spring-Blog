@@ -12,7 +12,7 @@
     <p th:text="${sneakers.getName()}"></p>
         <br>
 
-    <form th:action="'sneakers/edit/' + ${sneakers.getId()}" method="get">
+    <form th:action="'/sneakers/edit/' + ${sneakers.getId()}" method="get">
     <button> Edit</button>
 </form>
 

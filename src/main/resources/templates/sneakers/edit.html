@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Page</title>
 </head>
 <body>
+
+<form th:action="${'/sneakers/edit'}" method="POST">
+
+    <label name="sneakerBrand">Brand of Sneaker:</label>
+    <input name="sneakerBrand" th:value="${sneakerToEdit.getBrand()}">
+
+    <label name="sneakerModel">Model of Sneaker:</label>
+    <input name="sneakerModel" th:value="${sneakerToEdit.getModel()}">
+
+    <label name="sneakerName">Name of Sneaker:</label>
+    <input name="sneakerName" th:value="${sneakerToEdit.getName()}">
+
+    <input name="sneakerId" type="hidden" th:value="${sneakerToEdit.getId()}">
+    <button type="submit">Submit Edit</button>
+</form>
 
 </body>
 </html>
