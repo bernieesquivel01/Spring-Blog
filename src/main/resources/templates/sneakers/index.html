@@ -6,20 +6,21 @@
 </head>
 <body>
 
-<div th:each="sneakers : ${allSneakers}">
-    <span th:text="${sneakers.getBrand()}"></span>
-    <p th:text="${sneakers.getModel()}"></p>
-    <p th:text="${sneakers.getName()}"></p>
+<div th:each="sneaker : ${allSneakers}">
+    <span th:text="${sneaker.getBrand()}"></span>
+    <p th:text="${sneaker.getModel()}"></p>
+    <p th:text="${sneaker.getName()}"></p>
+    Created by: <span th:text="${sneaker.getUser().getEmail()}"></span>
         <br>
 
-    <form th:action="'/sneakers/edit/' + ${sneakers.getId()}" method="get">
+    <form th:action="'/sneakers/edit/' + ${sneaker.getId()}" method="get">
     <button> Edit</button>
 </form>
 
-    <form th:action="'/sneakers/delete/' + ${sneakers.getId()}" method="post">
+    <form th:action="'/sneakers/delete/' + ${sneaker.getId()}" method="post">
     <button>Delete</button>
         </form>
-    </span>
+
 </div>
 </body>
 </html>

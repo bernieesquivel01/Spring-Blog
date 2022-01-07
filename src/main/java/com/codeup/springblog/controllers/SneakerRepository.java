@@ -1,12 +1,12 @@
 package com.codeup.springblog.controllers;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
-public interface SneakersRepository extends JpaRepository<Sneaker, Long>{
+public interface SneakerRepository extends JpaRepository<Sneaker, Long>{
 //    Sneaker findByBrand(String brand);
-    List<Sneaker> findAllByBrand (String brand);
+//    List<Sneaker> findAllByBrand (String brand);
 }
 
 

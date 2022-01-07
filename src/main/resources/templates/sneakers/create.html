@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main class="container">
+  <form th:action="@{/sneakers/create}" th:method="POST" th:object="${sneaker}">
+
+      <label for="sneakerBrand">Brand</label>
+      <input type="text" th:field="*{brand}" id="sneakerBrand"/>
+
+      <label for="sneakerModel">Model</label>
+      <input type="text" th:field="*{model}" id="sneakerModel"/>
+
+      <label for="sneakerName">Name</label>
+      <input type="text" th:field="*{name}" id="sneakerName"/>
+      <br>
+      <button type="submit">Submit</button>
+  </form>
+
+</main>
+</body>
+</html>
