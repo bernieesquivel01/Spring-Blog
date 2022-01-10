@@ -1,4 +1,6 @@
-package com.codeup.springblog.controllers;
+package com.codeup.springblog.models;
+
+import com.codeup.springblog.controllers.Sneaker;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,9 +21,19 @@ public class User {
     @Column //(nullable = false)
     private String password;
 
+    public User(User copy){
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+    }
+
+    public User() {
+
+    }
+
     @OneToMany(mappedBy = "user")
     private List<Sneaker> userSneakers;
-
 
     public long getId() {
         return id;

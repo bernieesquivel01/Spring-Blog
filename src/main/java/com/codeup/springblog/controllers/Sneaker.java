@@ -1,5 +1,7 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.User;
+
 import javax.persistence.*;
 
 @Entity

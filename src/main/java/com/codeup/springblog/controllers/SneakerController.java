@@ -1,6 +1,8 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -69,7 +71,8 @@ public class SneakerController {
     @PostMapping("/sneakers/create")
     public String createSneaker(@ModelAttribute Sneaker sneaker){
 
-        sneaker.setUser(userDao.getById(1L));
+        User sneakerCreator = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        sneaker.setUser(sneakerCreator);
 
         String emailSubject = sneaker.getUser().getUsername() + ", your post has been created.";
         String emailBody = "Congratulations - your latest sneaker has been added and ready to view on your site. Your post read: " + sneaker.getModel() +  sneaker.getName();
