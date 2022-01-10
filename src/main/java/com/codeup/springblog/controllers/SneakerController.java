@@ -1,5 +1,6 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +10,12 @@ public class SneakerController {
 
     private SneakerRepository sneakerDao;
     private UserRepository userDao;
+    private EmailService emailService;
 
-    public SneakerController(SneakerRepository sneakerDao, UserRepository userDao) {
+    public SneakerController(SneakerRepository sneakerDao, UserRepository userDao, EmailService emailService) {
         this.sneakerDao = sneakerDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
 
 //    @GetMapping("/sneakers")
@@ -67,6 +70,11 @@ public class SneakerController {
     public String createSneaker(@ModelAttribute Sneaker sneaker){
 
         sneaker.setUser(userDao.getById(1L));
+
+        String emailSubject = sneaker.getUser().getUsername() + ", your post has been created.";
+        String emailBody = "Congratulations - your latest sneaker has been added and ready to view on your site. Your post read: " + sneaker.getModel() +  sneaker.getName();
+
+        emailService.prepareAndSend(sneaker, emailSubject,  emailBody);
         sneakerDao.save(sneaker);
 //    public String createSneaker(@RequestParam(name="sneakerBrand") String sneakerBrand, @RequestParam(name="sneakerModel") String sneakerModel, @RequestParam(name="sneakerName") String sneakerName){
 //
